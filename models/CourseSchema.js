@@ -11,3 +11,4 @@ const CourseSchema  = new mongoose.Schema ( {
 
 module.exports =  mongoose.model('AcademicCourse', CourseSchema)
 
+

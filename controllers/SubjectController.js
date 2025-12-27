@@ -14,10 +14,15 @@ const createSubject = async (req,res) => {
 const updateSubject = async (req, res) => {
   try {
     const updateData = await AcademicSubject.findByIdAndUpdate(
-      subjectName, semester
+      req.params.subjectName, req.params.semester, req.body, {new: true , runValidators: false}
     )
+    res.status(200).json({ success: true, data: updateData, message: "Subject updated successfully" });
+  } catch (errorr) {
+    res.status(500).json({ success: false, error: error.message, message: "Subject updation failed" });
+    if(!updateData) {
+      return res.status(404).json({ success: false, msg: "Subject not found" })
   }
 }
+};
 
-
-module.exports = { createSubject };
+module.exports = { createSubject, updateSubject};
